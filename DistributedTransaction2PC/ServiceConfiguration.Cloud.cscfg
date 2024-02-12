@@ -5,12 +5,14 @@
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
       <Setting name="Setting1" value="" />
+      <Setting name="DataConnectionStringBankUser" value="UseDevelopmentStorage=true" />
     </ConfigurationSettings>
   </Role>
   <Role name="TechStore">
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="DataConnectionStringTechProduct" value="UseDevelopmentStorage=true" />
     </ConfigurationSettings>
   </Role>
   <Role name="TransactionCoordinator">

@@ -6,15 +6,15 @@ namespace Bank_Data
 {
     public class User : TableEntity
     {
-        public string UserId { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public double Balance { get; set; }
 
-        public User(string UserId)
+        public User(string Id)
         {
-            this.UserId = UserId;
+            this.Id = Id;
             PartitionKey = "BankUser";
-            RowKey = UserId;
+            RowKey = Id;
         }
         public User()
         {

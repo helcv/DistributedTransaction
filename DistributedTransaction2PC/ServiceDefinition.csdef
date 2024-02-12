@@ -4,6 +4,7 @@
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
       <Setting name="Setting1" />
+      <Setting name="DataConnectionStringBankUser" />
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="BankInput" protocol="tcp" port="10100" />
@@ -12,6 +13,7 @@
   <WorkerRole name="TechStore" vmsize="Standard_D1_v2">
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="DataConnectionStringTechProduct" />
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="TechInput" protocol="tcp" port="10101" />
