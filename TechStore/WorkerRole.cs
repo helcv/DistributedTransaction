@@ -15,6 +15,7 @@ namespace TechStore
     {
         private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent runCompleteEvent = new ManualResetEvent(false);
+        private readonly TechStoreServer server = new TechStoreServer();
 
         public override void Run()
         {
@@ -39,6 +40,7 @@ namespace TechStore
             // see the MSDN topic at https://go.microsoft.com/fwlink/?LinkId=166357.
 
             bool result = base.OnStart();
+            server.Open();
 
             Trace.TraceInformation("TechStore has been started");
 
@@ -53,6 +55,7 @@ namespace TechStore
             this.runCompleteEvent.WaitOne();
 
             base.OnStop();
+            server.Close();
 
             Trace.TraceInformation("TechStore has stopped");
         }

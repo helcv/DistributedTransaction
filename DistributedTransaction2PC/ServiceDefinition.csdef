@@ -3,16 +3,26 @@
   <WorkerRole name="Bank" vmsize="Standard_D1_v2">
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="Setting1" />
     </ConfigurationSettings>
+    <Endpoints>
+      <InputEndpoint name="BankInput" protocol="tcp" port="10100" />
+    </Endpoints>
   </WorkerRole>
   <WorkerRole name="TechStore" vmsize="Standard_D1_v2">
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
     </ConfigurationSettings>
+    <Endpoints>
+      <InputEndpoint name="TechInput" protocol="tcp" port="10101" />
+    </Endpoints>
   </WorkerRole>
   <WorkerRole name="TransactionCoordinator" vmsize="Standard_D1_v2">
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
     </ConfigurationSettings>
+    <Endpoints>
+      <InputEndpoint name="PurchaseInput" protocol="tcp" port="10102" />
+    </Endpoints>
   </WorkerRole>
 </ServiceDefinition>

@@ -15,6 +15,7 @@ namespace TransactionCoordinator
     {
         private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent runCompleteEvent = new ManualResetEvent(false);
+        private readonly PurchaseServer server = new PurchaseServer();
 
         public override void Run()
         {
@@ -39,6 +40,7 @@ namespace TransactionCoordinator
             // see the MSDN topic at https://go.microsoft.com/fwlink/?LinkId=166357.
 
             bool result = base.OnStart();
+            server.Open();
 
             Trace.TraceInformation("TransactionCoordinator has been started");
 
@@ -53,6 +55,7 @@ namespace TransactionCoordinator
             this.runCompleteEvent.WaitOne();
 
             base.OnStop();
+            server.Close();
 
             Trace.TraceInformation("TransactionCoordinator has stopped");
         }

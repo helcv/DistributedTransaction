@@ -15,6 +15,7 @@ namespace Bank
     {
         private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent runCompleteEvent = new ManualResetEvent(false);
+        private readonly BankServer server = new BankServer();
 
         public override void Run()
         {
@@ -39,6 +40,8 @@ namespace Bank
             // see the MSDN topic at https://go.microsoft.com/fwlink/?LinkId=166357.
 
             bool result = base.OnStart();
+            server.Open();
+            
 
             Trace.TraceInformation("Bank has been started");
 
@@ -53,6 +56,7 @@ namespace Bank
             this.runCompleteEvent.WaitOne();
 
             base.OnStop();
+            server.Close();
 
             Trace.TraceInformation("Bank has stopped");
         }
