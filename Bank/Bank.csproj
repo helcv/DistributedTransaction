@@ -57,6 +57,10 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bank_Data\Bank_Data.csproj">
+      <Project>{1EAFA375-95F0-4865-9619-36D5BE7BC2C3}</Project>
+      <Name>Bank_Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{8205820A-AE6A-476C-994C-ECB0ADA3FEE6}</Project>
       <Name>Common</Name>

@@ -50,9 +50,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bank\Bank.csproj">
+      <Project>{5B6E8CAD-CA6C-4DD6-8414-6E882D8C4AE3}</Project>
+      <Name>Bank</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bank_Data\Bank_Data.csproj">
+      <Project>{1EAFA375-95F0-4865-9619-36D5BE7BC2C3}</Project>
+      <Name>Bank_Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{8205820A-AE6A-476C-994C-ECB0ADA3FEE6}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TechStore\TechStore.csproj">
+      <Project>{3FDED166-34A9-4F54-A6E4-B73630F896B1}</Project>
+      <Name>TechStore</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

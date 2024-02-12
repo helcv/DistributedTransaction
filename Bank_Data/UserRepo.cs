@@ -28,7 +28,7 @@ namespace Bank_Data
             return results;
         }
 
-        public User RetrieveUser(string Id)
+        public User RetrieveUser(int Id)
         {
             var result = (from u in _table.CreateQuery<User>()
                          where u.Id == Id

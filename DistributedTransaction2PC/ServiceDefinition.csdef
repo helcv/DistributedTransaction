@@ -3,7 +3,6 @@
   <WorkerRole name="Bank" vmsize="Standard_D1_v2">
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
-      <Setting name="Setting1" />
       <Setting name="DataConnectionStringBankUser" />
     </ConfigurationSettings>
     <Endpoints>

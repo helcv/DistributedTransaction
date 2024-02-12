@@ -19,7 +19,7 @@ namespace TechStore_Data
             _storageAccount =
            CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("DataConnectionStringTechProduct"));
             CloudTableClient tableClient = new CloudTableClient(new Uri(_storageAccount.TableEndpoint.AbsoluteUri), _storageAccount.Credentials);
-            _table = tableClient.GetTableReference("BankUserTable");
+            _table = tableClient.GetTableReference("TechProductTable");
             _table.CreateIfNotExists();
         }
 
@@ -31,7 +31,7 @@ namespace TechStore_Data
             return results;
         }
 
-        public Product RetrieveProduct (string Id)
+        public Product RetrieveProduct (int Id)
         {
             var result = (from p in _table.CreateQuery<Product>()
                           where p.Id == Id

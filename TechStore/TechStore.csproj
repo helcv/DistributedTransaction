@@ -61,6 +61,10 @@
       <Project>{8205820A-AE6A-476C-994C-ECB0ADA3FEE6}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TechStore_Data\TechStore_Data.csproj">
+      <Project>{B1CBCC79-C718-40DE-9BCC-CBA38036E0B6}</Project>
+      <Name>TechStore_Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

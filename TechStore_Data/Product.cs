@@ -6,16 +6,16 @@ namespace TechStore_Data
 {
     public class Product : TableEntity
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public int Quantity { get; set; }
         public double Price { get; set; }
 
-        public Product(string Id)
+        public Product(int Id)
         {
             this.Id = Id;
             PartitionKey = "TechProduct";
-            RowKey = Id;
+            RowKey = Id.ToString();
         }
 
         public Product()
