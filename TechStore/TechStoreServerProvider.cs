@@ -6,12 +6,8 @@ namespace TechStore
 {
     public class TechStoreServerProvider : ITechStore
     {
-        private readonly ProductRepo _repo;
+        private readonly ProductRepo _repo = new ProductRepo();
 
-        public TechStoreServerProvider(ProductRepo repo)
-        {
-            _repo = repo;
-        }
         public void SeedData()
         {  
             _repo.AddProduct(new Product { Id = 1, Name = "HP Omen", Price = 500, Quantity = 3 });
