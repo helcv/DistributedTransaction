@@ -42,7 +42,7 @@ namespace TransactionCoordinator
             techStore_proxy.ListAvailableProducts();
         }
 
-        public bool OrderItem(string productId, string userId)
+        public bool OrderItem(string productId, int productQuantity, string userId)
         {     
 
             if (bank_proxy.EmptyTable())    // add data if tables are empty
@@ -51,8 +51,8 @@ namespace TransactionCoordinator
             if (techStore_proxy.EmptyTable())
                 techStore_proxy.SeedData();
 
-            techStore_proxy.EnlistPurchase(productId, 1);                           // take needed data
-            var productPrice = techStore_proxy.GetProductPrice(productId);
+            techStore_proxy.EnlistPurchase(productId, productQuantity);                           // take needed data
+            var productPrice = techStore_proxy.GetProductPrice(productId) * productQuantity;
             bank_proxy.EnlistMoneyTransfer(userId, productPrice);
 
             var techStore_prepare = techStore_proxy.Prepare();      // prepare for transfer

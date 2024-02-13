@@ -6,7 +6,7 @@ namespace Common
     public interface  IPurchase
     {
         [OperationContract]
-        bool OrderItem(string productId, string userId);
+        bool OrderItem(string productId, int productQuantity, string userId);
         [OperationContract]
         void ListUsers();
         [OperationContract]

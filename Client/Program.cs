@@ -48,7 +48,10 @@ namespace Client
                 if (productID.ToLower() == "x")
                     break;
 
-                if (proxy.OrderItem(productID, userId))
+                Console.WriteLine("\nHow many products would you like to buy?");
+                var productQuantity = Int32.Parse(Console.ReadLine());
+
+                if (proxy.OrderItem(productID, productQuantity, userId))
                 {
                     Console.WriteLine("\nUspesan transfer!");
                 }
