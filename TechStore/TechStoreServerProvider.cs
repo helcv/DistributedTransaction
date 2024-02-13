@@ -1,5 +1,7 @@
 ﻿using Common;
 using System;
+using System.Diagnostics;
+using System.Linq;
 using TechStore_Data;
 
 namespace TechStore
@@ -7,14 +9,16 @@ namespace TechStore
     public class TechStoreServerProvider : ITechStore
     {
         private readonly ProductRepo _repo = new ProductRepo();
+        private string pId;
+        private int count;
 
         public void SeedData()
         {  
-            _repo.AddProduct(new Product { Id = 1, Name = "HP Omen", Price = 500, Quantity = 3 });
-            _repo.AddProduct(new Product { Id = 2, Name = "Airpods", Price = 200, Quantity = 2 });
-            _repo.AddProduct(new Product { Id = 3, Name = "Galaxy S23", Price = 800, Quantity = 1 });
-            _repo.AddProduct(new Product { Id = 4, Name = "Beats", Price = 100, Quantity = 7 });
-            _repo.AddProduct(new Product { Id = 5, Name = "Macbook", Price = 3500, Quantity = 1 });
+            _repo.AddProduct(new Product { Id = "1", Name = "HP Omen", Price = 500, Quantity = 3 });
+            _repo.AddProduct(new Product { Id = "2", Name = "Airpods", Price = 200, Quantity = 2 });
+            _repo.AddProduct(new Product { Id = "3", Name = "Galaxy S23", Price = 800, Quantity = 1 });
+            _repo.AddProduct(new Product { Id = "4", Name = "Beats", Price = 100, Quantity = 7 });
+            _repo.AddProduct(new Product { Id = "5", Name = "Macbook", Price = 3500, Quantity = 1 });
         }
 
         public TechStoreServerProvider()
@@ -30,32 +34,86 @@ namespace TechStore
         }
         public void Commit()
         {
-            throw new NotImplementedException();
+            var products = _repo.RetrieveAllProducts().ToList();
+            Product temp_prod;
+
+            foreach (Product p in products)
+            {
+                if (p.Id == pId + "_prep")
+                {
+                    temp_prod = new Product(pId);
+                    temp_prod.Quantity = p.Quantity;
+                    temp_prod.Name = p.Name;
+                    temp_prod.Price = p.Price;
+
+                    _repo.DeleteProduct(p);
+                    _repo.DeleteProduct(_repo.RetrieveProduct(pId));
+                    _repo.AddProduct(temp_prod);
+                }
+            }
         }
 
         public void EnlistPurchase(string productId, int count)
         {
-            throw new NotImplementedException();
+            pId = productId;
+            this.count = count;
         }
 
-        public double GetItemPrice(string productId)
+        public double GetProductPrice(string productId)
         {
-            throw new NotImplementedException();
+            var products = _repo.RetrieveAllProducts().ToList();
+
+            foreach (Product p in products)
+            {
+                if (p.Id == productId)
+                    return p.Price;
+            }
+
+            return -1;
         }
 
-        public void ListAvailableItems()
+        public void ListAvailableProducts()
         {
-            throw new NotImplementedException();
+            var products = _repo.RetrieveAllProducts().ToList();
+
+            foreach (Product p in products)
+            {
+                Trace.WriteLine($"Product ID - {p.Id}\nAmount - {p.Quantity}\nPrice - {p.Price}\nName - {p.Name}");     //print in compute emulator
+            }
         }
 
         public bool Prepare()
         {
-            throw new NotImplementedException();
+            var products = _repo.RetrieveAllProducts().ToList();
+
+            foreach (Product p in products)
+            {
+                if (p.Id == pId && (p.Quantity - count) >= 0)
+                {
+                    p.Quantity -= count;
+                    Product productToAdd = new Product(pId + "_prep");
+                    productToAdd.Quantity = p.Quantity;
+                    productToAdd.Name = p.Name;
+                    productToAdd.Price = p.Price;
+
+                    _repo.AddProduct(productToAdd);
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void Rollback()
         {
-            throw new NotImplementedException();
+            var products = _repo.RetrieveAllProducts().ToList();
+
+            foreach (Product p in products)
+            {
+                if (p.Id == pId + "_prep")
+                {
+                    _repo.DeleteProduct(p);
+                }
+            }
         }
     }
 }
