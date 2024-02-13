@@ -30,16 +30,33 @@ namespace Client
 
             while (true)
             {
-                if (proxy.OrderItem("4", "3"))
-                {
-                    Console.WriteLine("Uspesan transfer!");
-                    break;
-                }
-                Console.WriteLine("Transfer neuspesan!");
-                break;
-            }
+                proxy.ListProducts();
+                proxy.ListUsers();
 
-            Console.ReadLine();
+                Console.WriteLine("Visit Compute Emulator to see test data!\n");
+                Console.WriteLine("If you want to exit pres X\n");
+
+                Console.WriteLine("Enter User ID");
+                var userId = Console.ReadLine();
+
+                if (userId.ToLower() == "x")
+                    break;
+
+                Console.WriteLine("\nEnter Product ID");
+                var productID = Console.ReadLine();
+
+                if (productID.ToLower() == "x")
+                    break;
+
+                if (proxy.OrderItem(productID, userId))
+                {
+                    Console.WriteLine("\nUspesan transfer!");
+                }
+                else
+                {
+                    Console.WriteLine("\nTransfer neuspesan!");
+                }
+            }
             
         }
     }

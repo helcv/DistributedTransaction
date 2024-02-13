@@ -83,7 +83,7 @@ namespace TechStore
 
             foreach (Product p in products)
             {
-                Trace.WriteLine($"Product ID - {p.Id}\nAmount - {p.Quantity}\nPrice - {p.Price}\nName - {p.Name}\n*****************");     //print in compute emulator
+                Trace.WriteLine($"Product ID - {p.Id}\nAmount - {p.Quantity}\nPrice - {p.Price}\nName - {p.Name}\n*****************\n\n");     //print in compute emulator
             }
         }
 

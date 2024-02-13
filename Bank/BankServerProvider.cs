@@ -31,7 +31,7 @@ namespace Bank
 
         public void SeedData()
         {    
-            _repo.AddUser(new User("1") { Balance = 5000, Name = "Milan"});
+            _repo.AddUser(new User("1") { Balance = 500000, Name = "Milan"});
             _repo.AddUser(new User("2") { Balance = 10000, Name = "Vlada" });
             _repo.AddUser(new User("3") { Balance = 200, Name = "Stefan" });
             _repo.AddUser(new User("4") { Balance = 5000, Name = "Dragan" });
@@ -71,7 +71,7 @@ namespace Bank
 
             foreach (User u in users)
             {
-                Trace.WriteLine($"User ID - {u.Id}\nName - {u.Name}\nBalance - {u.Balance}\n*****************");   //print in compute emulator
+                Trace.WriteLine($"User ID - {u.Id}\nName - {u.Name}\nBalance - {u.Balance}\n*****************\n\n");   //print in compute emulator
             }
         }
 

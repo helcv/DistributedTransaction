@@ -29,19 +29,27 @@ namespace TransactionCoordinator
             ChannelFactory<ITechStore> factory = new ChannelFactory<ITechStore>(binding, new EndpointAddress(endpoint));
             techStore_proxy = factory.CreateChannel();
         }
-        public bool OrderItem(string productId, string userId)
+
+        public void ListUsers()
         {
-            ConnectToTechStore();       // connect to bank and store
             ConnectToBank();
+            bank_proxy.ListClients();
+        }
+
+        public void ListProducts()
+        {
+            ConnectToTechStore();
+            techStore_proxy.ListAvailableProducts();
+        }
+
+        public bool OrderItem(string productId, string userId)
+        {     
 
             if (bank_proxy.EmptyTable())    // add data if tables are empty
                 bank_proxy.SeedData();
 
             if (techStore_proxy.EmptyTable())
                 techStore_proxy.SeedData();
-
-            bank_proxy.ListClients();                       // print data in compute emulator
-            techStore_proxy.ListAvailableProducts();
 
             techStore_proxy.EnlistPurchase(productId, 1);                           // take needed data
             var productPrice = techStore_proxy.GetProductPrice(productId);
@@ -59,6 +67,10 @@ namespace TransactionCoordinator
 
             techStore_proxy.Commit();       // if everything is allright, commit purchase
             bank_proxy.Commit();
+
+            bank_proxy.ListClients();                       // print data in compute emulator
+            techStore_proxy.ListAvailableProducts();
+
             return true;
         }
     }

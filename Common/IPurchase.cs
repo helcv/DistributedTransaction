@@ -7,5 +7,9 @@ namespace Common
     {
         [OperationContract]
         bool OrderItem(string productId, string userId);
+        [OperationContract]
+        void ListUsers();
+        [OperationContract]
+        void ListProducts();
     }
 }
