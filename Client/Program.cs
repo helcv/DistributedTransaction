@@ -14,7 +14,7 @@ namespace Client
 
         private void Connect()
         {
-            string endpoint = String.Format("net.tcp://localhost:10100/{0}", externalEndpointName);
+            string endpoint = String.Format("net.tcp://localhost:10102/{0}", externalEndpointName);
 
             var binding = new NetTcpBinding();
             ChannelFactory<IPurchase> factory = new ChannelFactory<IPurchase>(binding, new EndpointAddress(endpoint));
@@ -28,20 +28,17 @@ namespace Client
             Program program = new Program();
             program.Connect();
 
-            BankServerProvider bankProvider = new BankServerProvider();
-            TechStoreServerProvider techProvider = new TechStoreServerProvider();
+            while (true)
+            {
+                if (proxy.OrderItem("4", "3"))
+                {
+                    Console.WriteLine("Uspesan transfer!");
+                    break;
+                }
+                Console.WriteLine("Transfer neuspesan!");
+                break;
+            }
 
-            if (bankProvider.EmptyTable())
-                bankProvider.SeedData();
-
-            if (techProvider.EmptyTable())
-                techProvider.SeedData();
-            
-
-            
-            
-
-            
             Console.ReadLine();
             
         }

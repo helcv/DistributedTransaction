@@ -9,5 +9,9 @@ namespace Common
         void ListClients();
         [OperationContract]
         void EnlistMoneyTransfer(string userId, double money);
+        [OperationContract]
+        bool EmptyTable();
+        [OperationContract]
+        void SeedData();
     }
 }

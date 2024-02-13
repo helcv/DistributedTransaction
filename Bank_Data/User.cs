@@ -14,7 +14,7 @@ namespace Bank_Data
         {
             this.Id = Id;
             PartitionKey = "BankUser";
-            RowKey = Id.ToString();
+            RowKey = Id;
         }
         public User()
         {

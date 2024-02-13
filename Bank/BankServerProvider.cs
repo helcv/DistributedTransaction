@@ -18,18 +18,24 @@ namespace Bank
 
         public bool EmptyTable()
         {
-            if (_repo.RetrieveAllUsers() == null)
-                return true;
-            return false;
+            var users = _repo.RetrieveAllUsers().ToList();
+
+            foreach (User u in users)
+            {
+                if (u.Balance > -1)
+                    return false;
+            }
+            return true;
+        
         }
 
         public void SeedData()
         {    
-            _repo.AddUser(new User { Balance = 5000, Id = "1", Name = "Milan" });
-            _repo.AddUser(new User { Balance = 10000, Id = "2", Name = "Vlada" });
-            _repo.AddUser(new User { Balance = 200, Id = "3", Name = "Stefan" });
-            _repo.AddUser(new User { Balance = 5000, Id = "4", Name = "Dragan" });
-            _repo.AddUser(new User { Balance = 1500, Id = "5", Name = "Rade" });
+            _repo.AddUser(new User("1") { Balance = 5000, Name = "Milan"});
+            _repo.AddUser(new User("2") { Balance = 10000, Name = "Vlada" });
+            _repo.AddUser(new User("3") { Balance = 200, Name = "Stefan" });
+            _repo.AddUser(new User("4") { Balance = 5000, Name = "Dragan" });
+            _repo.AddUser(new User("5") { Balance = 1500, Name = "Rade" });
         }
         public void Commit()
         {
@@ -65,7 +71,7 @@ namespace Bank
 
             foreach (User u in users)
             {
-                Trace.WriteLine($"User ID - {u.Id}\nName - {u.Name}\nBalance - {u.Balance}");   //print in compute emulator
+                Trace.WriteLine($"User ID - {u.Id}\nName - {u.Name}\nBalance - {u.Balance}\n*****************");   //print in compute emulator
             }
         }
 

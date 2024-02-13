@@ -31,7 +31,7 @@ namespace TechStore_Data
             return results;
         }
 
-        public Product RetrieveProduct (int Id)
+        public Product RetrieveProduct (string Id)
         {
             var result = (from p in _table.CreateQuery<Product>()
                           where p.Id == Id

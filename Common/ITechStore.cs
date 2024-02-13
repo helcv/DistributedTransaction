@@ -6,10 +6,14 @@ namespace Common
     public interface ITechStore : ITransaction
     {
         [OperationContract]
-        void ListAvailableItems();
+        void ListAvailableProducts();
         [OperationContract]
         void EnlistPurchase(string productId, int count);
         [OperationContract]
-        double GetItemPrice(string productId);
+        double GetProductPrice(string productId);
+        [OperationContract]
+        bool EmptyTable();
+        [OperationContract]
+        void SeedData();
     }
 }

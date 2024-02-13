@@ -14,11 +14,11 @@ namespace TechStore
 
         public void SeedData()
         {  
-            _repo.AddProduct(new Product { Id = "1", Name = "HP Omen", Price = 500, Quantity = 3 });
-            _repo.AddProduct(new Product { Id = "2", Name = "Airpods", Price = 200, Quantity = 2 });
-            _repo.AddProduct(new Product { Id = "3", Name = "Galaxy S23", Price = 800, Quantity = 1 });
-            _repo.AddProduct(new Product { Id = "4", Name = "Beats", Price = 100, Quantity = 7 });
-            _repo.AddProduct(new Product { Id = "5", Name = "Macbook", Price = 3500, Quantity = 1 });
+            _repo.AddProduct(new Product("1") {Name = "HP Omen", Price = 50000, Quantity = 3 });
+            _repo.AddProduct(new Product("2") {Name = "Airpods", Price = 20000, Quantity = 2 });
+            _repo.AddProduct(new Product("3") {Name = "Galaxy S23", Price = 800000, Quantity = 1 });
+            _repo.AddProduct(new Product("4") {Name = "Adapter", Price = 100, Quantity = 7 });
+            _repo.AddProduct(new Product("5") {Name = "Mouse", Price = 3500, Quantity = 1 });
         }
 
         public TechStoreServerProvider()
@@ -28,9 +28,14 @@ namespace TechStore
 
         public bool EmptyTable()
         {
-            if (_repo.RetrieveAllProducts() == null)
-                return true;
-            return false;
+            var products = _repo.RetrieveAllProducts().ToList();
+
+            foreach(Product p in products)
+            {
+                if (p.Price > -1)
+                    return false;
+            }
+            return true;
         }
         public void Commit()
         {
@@ -78,7 +83,7 @@ namespace TechStore
 
             foreach (Product p in products)
             {
-                Trace.WriteLine($"Product ID - {p.Id}\nAmount - {p.Quantity}\nPrice - {p.Price}\nName - {p.Name}");     //print in compute emulator
+                Trace.WriteLine($"Product ID - {p.Id}\nAmount - {p.Quantity}\nPrice - {p.Price}\nName - {p.Name}\n*****************");     //print in compute emulator
             }
         }
 
